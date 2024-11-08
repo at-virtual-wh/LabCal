@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Simple</title>
+  <style>
+    /* Estilos CSS para una apariencia moderna y elegante */
+    body {
+      background-color: #1b1b1f;
+      color: #e0e0e0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .calculator-container {
+      background-color: #28282b;
+      padding: 20px 40px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      width: 300px;
+    }
+
+    .calculator-container h1 {
+      color: #a1c4fd;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    .input-field {
+      background: #444;
+      border: none;
+      color: #fff;
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      font-size: 1rem;
+      border-radius: 5px;
+    }
+
+    .input-field::placeholder {
+      color: #888;
+    }
+
+    .button {
+      background-color: #a1c4fd;
+      color: #28282b;
+      font-size: 1rem;
+      padding: 10px 0;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #89abf8;
+    }
+
+    .result {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      color: #a1c4fd;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator-container">
+    <h1>Calculadora</h1>
+    <input type="number" id="num1" class="input-field" placeholder="Primer número" />
+    <input type="number" id="num2" class="input-field" placeholder="Segundo número" />
+    <select id="operation" class="input-field">
+      <option value="suma">Suma</option>
+      <option value="resta">Resta</option>
+      <option value="multiplicacion">Multiplicación</option>
+      <option value="division">División</option>
+    </select>
+    <button onclick="calculadora()" class="button">Calcular</button>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    // Parte 1: Crear funciones matemáticas para cada operación
+    function suma(a, b) {
+      return a + b;
+    }
+
+    function resta(a, b) {
+      return a - b;
+    }
+
+    function multiplicacion(a, b) {
+      return a * b;
+    }
+
+    function division(a, b) {
+      if (b === 0) {
+        return 'Error: División por cero';
+      }
+      return a / b;
+    }
+
+    // Parte 2: Función principal calculadora
+    function calculadora() {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+      const operation = document.getElementById("operation").value;
+      let result;
+
+      // Validar que los números sean válidos
+      if (isNaN(num1) || isNaN(num2)) {
+        result = "Por favor, ingresa números válidos.";
+      } else {
+        // Seleccionar la operación
+        switch (operation) {
+          case 'suma':
+            result = suma(num1, num2);
+            break;
+          case 'resta':
+            result = resta(num1, num2);
+            break;
+          case 'multiplicacion':
+            result = multiplicacion(num1, num2);
+            break;
+          case 'division':
+            result = division(num1, num2);
+            break;
+          default:
+            result = "Operación no válida.";
+        }
+      }
+
+      // Mostrar el resultado
+      document.getElementById("result").innerText = `Resultado: ${result}`;
+    }
+  </script>
+</body>
+</html>
